@@ -6,6 +6,7 @@ source "http://rubygems.org"
 gem "thor"
 gem "servolux"
 gem "ma-zmq"
+gem "cucub-protocol"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
