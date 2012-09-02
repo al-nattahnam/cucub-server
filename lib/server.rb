@@ -27,7 +27,7 @@ module Cucub
     end
 
     def run
-      Cucub.init
+      #Cucub.init
       Cucub.start!(@host, @run_block)
       Process.waitall
     end
