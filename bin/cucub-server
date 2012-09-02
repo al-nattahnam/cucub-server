@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+STDERR.sync = STDOUT.sync = true
+require File.expand_path('../../lib/cli.rb', __FILE__)
+
+Cucub::CLI.start
