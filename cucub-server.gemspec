@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
     "VERSION",
     "bin/cucub-server",
     "cucub-server.gemspec",
+    "examples/boot.rb",
     "lib/channel.rb",
     "lib/cli.rb",
     "lib/cucub-server.rb",

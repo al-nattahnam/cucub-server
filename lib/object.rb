@@ -20,7 +20,7 @@ module Cucub
 
   def self.start!(address, block=Proc.new({}))
     @@address = address
-    Cucub::Channel.initialize
+    #### Cucub::Channel.initialize
 
     # refactor !
     # separar este codigo en init y start (?)

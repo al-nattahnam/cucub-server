@@ -29,8 +29,8 @@ module Cucub
               puts '?'
           end
         end
-=end
         @ipc_get = Cucub::Channel.ipc_get
+=end
 
 ####
 =begin
