@@ -5,15 +5,14 @@ source "http://rubygems.org"
 
 gem "thor"
 gem "servolux"
-gem "ma-zmq"
-gem "cucub-protocol"
+gem "ma-zmq", :path => "/home/krakatoa/workspace/al-nattahnam/ma-zmq"
+gem "cucub-protocol", :path => "/home/krakatoa/workspace/al-nattahnam/cucub/protocol"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
 group :development do
-  gem "shoulda", ">= 0"
-  gem "rdoc", "~> 3.12"
-  gem "bundler", "~> 1.1.3"
+  gem "rspec"
+  gem "bundler", "~> 1.2.1"
   gem "jeweler", "~> 1.8.4"
-  gem "simplecov", ">= 0"
+  gem "simplecov"
 end
