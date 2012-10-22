@@ -33,7 +33,7 @@ module Cucub
     end
 
     def prefork
-      workers_pool = Servolux::Pre
+      #workers_pool = Servolux::Pre
     end
 
     def before_stopping

@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fernando Alonso"]
-  s.date = "2012-09-02"
+  s.date = "2012-10-22"
   s.description = "longer description of your gem"
   s.email = "krakatoa1987@gmail.com"
   s.executables = ["cucub-server"]
@@ -50,18 +50,18 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<thor>, [">= 0"])
       s.add_runtime_dependency(%q<servolux>, [">= 0"])
       s.add_runtime_dependency(%q<ma-zmq>, [">= 0"])
-      s.add_development_dependency(%q<shoulda>, [">= 0"])
-      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.1.3"])
+      s.add_runtime_dependency(%q<cucub-protocol>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, [">= 0"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.2.1"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_development_dependency(%q<simplecov>, [">= 0"])
     else
       s.add_dependency(%q<thor>, [">= 0"])
       s.add_dependency(%q<servolux>, [">= 0"])
       s.add_dependency(%q<ma-zmq>, [">= 0"])
-      s.add_dependency(%q<shoulda>, [">= 0"])
-      s.add_dependency(%q<rdoc>, ["~> 3.12"])
-      s.add_dependency(%q<bundler>, ["~> 1.1.3"])
+      s.add_dependency(%q<cucub-protocol>, [">= 0"])
+      s.add_dependency(%q<rspec>, [">= 0"])
+      s.add_dependency(%q<bundler>, ["~> 1.2.1"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_dependency(%q<simplecov>, [">= 0"])
     end
@@ -69,9 +69,9 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<thor>, [">= 0"])
     s.add_dependency(%q<servolux>, [">= 0"])
     s.add_dependency(%q<ma-zmq>, [">= 0"])
-    s.add_dependency(%q<shoulda>, [">= 0"])
-    s.add_dependency(%q<rdoc>, ["~> 3.12"])
-    s.add_dependency(%q<bundler>, ["~> 1.1.3"])
+    s.add_dependency(%q<cucub-protocol>, [">= 0"])
+    s.add_dependency(%q<rspec>, [">= 0"])
+    s.add_dependency(%q<bundler>, ["~> 1.2.1"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
     s.add_dependency(%q<simplecov>, [">= 0"])
   end

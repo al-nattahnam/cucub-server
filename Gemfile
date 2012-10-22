@@ -6,7 +6,7 @@ source "http://rubygems.org"
 gem "thor"
 gem "servolux"
 gem "ma-zmq", :path => "/home/krakatoa/workspace/al-nattahnam/ma-zmq"
-gem "cucub-protocol", :path => "/home/krakatoa/workspace/al-nattahnam/cucub/protocol"
+gem "cucub-protocol", :path => "/home/krakatoa/workspace/al-nattahnam/cucub/protocol", :require => "cucub-protocol"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
