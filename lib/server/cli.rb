@@ -13,6 +13,7 @@ module Cucub
 
       desc "start", "start cucub as a service"
       method_option :host, :aliases => '-h', :default => '127.0.0.1', :type => :string
+      method_option :config, :aliases => '-c', :default => 'config/protocol.ini', :type => :string
       def start(boot_file)
         opts = options.dup
 
@@ -25,7 +26,7 @@ module Cucub
         logger.level = Logger::DEBUG
 
         # encapsular esto en una clase de Cucub::Server
-        pid_file = File.expand_path('cucub.pid')
+        pid_file = File.expand_path('cucub-server.pid')
 
         # before server
         #driver = Driver.instance

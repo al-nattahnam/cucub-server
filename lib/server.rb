@@ -1,4 +1,5 @@
 require 'singleton'
+require './lib/server/configuration'
 
 module Cucub
   class Server
@@ -10,6 +11,7 @@ module Cucub
 
     def start!(server_opts={})
       @address = server_opts[:host]
+      @config_filepath = server_opts[:config]
       @dispatcher.start
     end
 
@@ -19,6 +21,10 @@ module Cucub
 
     def address
       @address
+    end
+
+    def config_filepath
+      @config_filepath
     end
   end
   
