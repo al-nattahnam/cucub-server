@@ -28,6 +28,8 @@ module Cucub
       @reply
     end
 
+    ### Right now, and in earlier versions, cucub-server will support only REPLY socket for inbound.
+=begin
     def self.pull
       # Es usado dentro del Reactor
       return @pull if @pull.is_a? MaZMQ::Pull
@@ -35,13 +37,36 @@ module Cucub
       @pull.bind(:tcp, Cucub.address, 6442)
 
 ####
-=begin
       @pull.on_read { |msg|
         Cucub::Queue.instance.push(msg)
       }
-=end
 
       @pull
+    end
+=end
+
+    def self.inner_inbound
+      # a ZMQ PUSH-PULL socket which binds to the local server as a 'pusher',
+      #   so workers connect to it in a 1-N way to consume messages.
+
+      # It works by setting up an IPC socket. In a future, it might be considered to
+      #   enable tcp communication, so workers can be outside the local server.
+
+      return @inner_inbound if @inner_inbound.is_a? MaZMQ::Push.new
+      @inner_inbound = MaZMQ::Push.new
+      @inner_inbound.bind :ipc, "/tmp/cucub-inner-inbound.sock"
+    end
+
+    def self.inner_outbound
+      # a ZMQ PUSH-PULL socket which binds to the local server as a 'puller',
+      #   so workers connect to it in a 1-N way to push their messages.
+      
+      # It works by setting up an IPC socket. In a future, it might be considered to
+      #   enable tcp communication, so workers can be outside the local server.
+
+      return @inner_outbound if @inner_outbound.is_a? MaZMQ::Pull.new
+      @inner_outbound = MaZMQ::Pull.new
+      @inner_outbound.bind :ipc, "/tmp/cucub-inner-outbound.sock"
     end
 
 ####

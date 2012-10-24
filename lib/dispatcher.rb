@@ -13,6 +13,8 @@ module Cucub
       block ||= Proc.new {}
       EM.epoll
       EM.run do
+        self.init_inner_channels
+        
         #### @proxy_worker = Cucub::ProxyWorker::connection
 
         ## TODO if list.size == 1 => oid unico
@@ -67,6 +69,11 @@ module Cucub
 
         block.call
       end
+    end
+
+    def init_inner_channels
+      @inner_inbound = Cucub::Channel.inner_inbound
+      @inner_outbound = Cucub::Channel.inner_outbound
     end
 
     def stop
