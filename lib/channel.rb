@@ -9,8 +9,9 @@ module Cucub
     def self.reply
       # Es usado dentro del Reactor
       return @reply if @reply.is_a? MaZMQ::Reply
+      $stdout.puts "Initializing Outer Inbound (REPLY) socket"
       @reply = MaZMQ::Reply.new
-      @reply.bind(:tcp, Cucub.address, 6441)
+      @reply.bind(:tcp, Cucub::Server.instance.address, 6441)
 
       @reply.on_read { |msg|
         # Chequear por llamada async / sync
@@ -52,7 +53,8 @@ module Cucub
       # It works by setting up an IPC socket. In a future, it might be considered to
       #   enable tcp communication, so workers can be outside the local server.
 
-      return @inner_inbound if @inner_inbound.is_a? MaZMQ::Push.new
+      return @inner_inbound if @inner_inbound.is_a? MaZMQ::Push
+      $stdout.puts "Initializing Inner Inbound (PUSH) socket"
       @inner_inbound = MaZMQ::Push.new
       @inner_inbound.bind :ipc, "/tmp/cucub-inner-inbound.sock"
     end
@@ -64,7 +66,8 @@ module Cucub
       # It works by setting up an IPC socket. In a future, it might be considered to
       #   enable tcp communication, so workers can be outside the local server.
 
-      return @inner_outbound if @inner_outbound.is_a? MaZMQ::Pull.new
+      return @inner_outbound if @inner_outbound.is_a? MaZMQ::Pull
+      $stdout.puts "Initializing Inner Outbound (PULL) socket"
       @inner_outbound = MaZMQ::Pull.new
       @inner_outbound.bind :ipc, "/tmp/cucub-inner-outbound.sock"
     end
@@ -120,6 +123,16 @@ module Cucub
       if @pull
         puts 'Closing pull channel.'
         @pull.close
+      end
+
+      if @inner_outbound
+        puts "Closing inner outbound channel."
+        @inner_outbound.close
+      end
+
+      if @inner_inbound
+        puts "Closing inner inbound channel."
+        @inner_inbound.close
       end
 
 =begin

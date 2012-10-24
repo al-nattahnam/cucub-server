@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
 STDERR.sync = STDOUT.sync = true
-require File.expand_path('../../lib/cli.rb', __FILE__)
+require File.expand_path('../../lib/cucub-server.rb', __FILE__)
+require File.expand_path('../../lib/server/servolux.rb', __FILE__)
+require File.expand_path('../../lib/server/cli.rb', __FILE__)
 
-Cucub::CLI.start
+Cucub::Server::CLI.start

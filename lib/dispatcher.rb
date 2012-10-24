@@ -33,7 +33,7 @@ module Cucub
         end
         @ipc_get = Cucub::Channel.ipc_get
 =end
-        if Cucub::Configuration.uses.include? ("box")
+        if Cucub::Configuration.instance.uses.include? ("box")
           @box = Cucub::Channel.reply
         end
 

@@ -1,11 +1,8 @@
-#require './request_channel_test'
+# Run it on root with this command: ruby bin/cucub-server start examples/boot.rb
 
-#e = Engine.new
+require './examples/reply_channel_test'
 
-Cucub.run {
-  #e.start
-  
-  1000.times {|i|
-    puts "i"
-  }
-}
+core = Core.new
+#core.oid = 1
+
+#Cucub.start!('10.0.0.5', Proc.new {})
