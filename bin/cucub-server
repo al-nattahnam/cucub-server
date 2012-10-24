@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
 
 STDERR.sync = STDOUT.sync = true
+
+require 'bundler'
+Bundler.require(:default, :cli)
+
 require File.expand_path('../../lib/cucub-server.rb', __FILE__)
 require File.expand_path('../../lib/server/servolux.rb', __FILE__)
 require File.expand_path('../../lib/server/cli.rb', __FILE__)

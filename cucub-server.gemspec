@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fernando Alonso"]
-  s.date = "2012-10-22"
+  s.date = "2012-10-24"
   s.description = "longer description of your gem"
   s.email = "krakatoa1987@gmail.com"
   s.executables = ["cucub-server"]
@@ -26,14 +26,19 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "bin/cucub-server",
+    "config/protocol.ini",
     "cucub-server.gemspec",
     "examples/boot.rb",
+    "examples/reply_channel_test.rb",
     "lib/channel.rb",
-    "lib/cli.rb",
     "lib/cucub-server.rb",
     "lib/dispatcher.rb",
-    "lib/object.rb",
     "lib/server.rb",
+    "lib/server/cli.rb",
+    "lib/server/configuration.rb",
+    "lib/server/servolux.rb",
+    "spec/configuration_spec.rb",
+    "spec/spec_helper.rb",
     "test/helper.rb",
     "test/test_cucub-server.rb"
   ]

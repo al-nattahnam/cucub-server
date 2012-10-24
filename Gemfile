@@ -3,8 +3,11 @@ source "http://rubygems.org"
 # Example:
 #   gem "activesupport", ">= 2.3.5"
 
-gem "thor"
-gem "servolux"
+group :cli do
+  gem "thor"
+  gem "servolux"
+end
+
 gem "ma-zmq", :path => "/home/krakatoa/workspace/al-nattahnam/ma-zmq"
 gem "cucub-protocol", :path => "/home/krakatoa/workspace/al-nattahnam/cucub/protocol", :require => "cucub-protocol"
 
