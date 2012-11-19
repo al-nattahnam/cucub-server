@@ -23,6 +23,8 @@ module Cucub
         # Usar EM Defer
         #Cucub::LiveObject.pass(msg)
 
+        @inner_inbound.send_string(msg)
+
         @reply.send_string("Cucub::Reply ok!")
       }
 
