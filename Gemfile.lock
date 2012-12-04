@@ -6,19 +6,17 @@ PATH
       msgpack
 
 PATH
-  remote: /home/krakatoa/workspace/al-nattahnam/ma-zmq
+  remote: /home/krakatoa/workspace/al-nattahnam/pan-zmq
   specs:
-    ma-zmq (0.0.2)
-      eventmachine (= 1.0.0.beta.4)
-      ffi-rzmq (= 0.9.3)
+    pan-zmq (0.0.1)
+      ffi-rzmq (~> 0.9.6)
 
 GEM
   remote: http://rubygems.org/
   specs:
     diff-lcs (1.1.3)
-    eventmachine (1.0.0.beta.4)
-    ffi (1.1.5)
-    ffi-rzmq (0.9.3)
+    ffi (1.2.0)
+    ffi-rzmq (0.9.6)
       ffi
     git (1.2.5)
     inifile (2.0.2)
@@ -55,7 +53,7 @@ DEPENDENCIES
   bundler (~> 1.2.1)
   cucub-protocol!
   jeweler (~> 1.8.4)
-  ma-zmq!
+  pan-zmq!
   rspec
   servolux
   simplecov

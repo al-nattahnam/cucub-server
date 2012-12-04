@@ -8,7 +8,7 @@ group :cli do
   gem "servolux"
 end
 
-gem "ma-zmq", :path => "/home/krakatoa/workspace/al-nattahnam/ma-zmq"
+gem "pan-zmq", :path => "/home/krakatoa/workspace/al-nattahnam/pan-zmq"
 gem "cucub-protocol", :path => "/home/krakatoa/workspace/al-nattahnam/cucub/protocol", :require => "cucub-protocol"
 
 # Add dependencies to develop your gem here.

@@ -1,5 +1,5 @@
 require 'singleton'
-require 'ma-zmq'
+require 'pan-zmq'
 
 module Cucub
   class Dispatcher
@@ -11,8 +11,9 @@ module Cucub
 
     def start(block=nil)
       block ||= Proc.new {}
-      EM.epoll
-      EM.run do
+      #EM.epoll
+      #EM.run do
+      
         self.init_inner_channels
         
         #### @proxy_worker = Cucub::ProxyWorker::connection
@@ -68,7 +69,8 @@ module Cucub
 =end
 
         block.call
-      end
+      #end
+      PanZMQ::Poller.instance.poll
     end
 
     def init_inner_channels
@@ -79,7 +81,7 @@ module Cucub
     def stop
       #### Cucub::LiveProxy.shutdown!
       Cucub::Channel.shutdown!
-      EM.stop
+      #EM.stop
     end
   end
 end

@@ -8,12 +8,13 @@ module Cucub
 
     def self.reply
       # Es usado dentro del Reactor
-      return @reply if @reply.is_a? MaZMQ::Reply
+      return @reply if @reply.is_a? PanZMQ::Reply
       $stdout.puts "Initializing Outer Inbound (REPLY) socket"
-      @reply = MaZMQ::Reply.new
-      @reply.bind(:tcp, Cucub::Server.instance.address, 6441)
+      @reply = PanZMQ::Reply.new
+      @reply.bind("tcp://#{Cucub::Server.instance.address}:6441")
+      @reply.register
 
-      @reply.on_read { |msg|
+      @reply.on_receive { |msg|
         # Chequear por llamada async / sync
 
         # Async - returns job id
@@ -55,10 +56,10 @@ module Cucub
       # It works by setting up an IPC socket. In a future, it might be considered to
       #   enable tcp communication, so workers can be outside the local server.
 
-      return @inner_inbound if @inner_inbound.is_a? MaZMQ::Push
+      return @inner_inbound if @inner_inbound.is_a? PanZMQ::Push
       $stdout.puts "Initializing Inner Inbound (PUSH) socket"
-      @inner_inbound = MaZMQ::Push.new
-      @inner_inbound.bind :ipc, "/tmp/cucub-inner-inbound.sock"
+      @inner_inbound = PanZMQ::Push.new
+      @inner_inbound.bind "ipc:///tmp/cucub-inner-inbound.sock"
     end
 
     def self.inner_outbound
@@ -68,10 +69,11 @@ module Cucub
       # It works by setting up an IPC socket. In a future, it might be considered to
       #   enable tcp communication, so workers can be outside the local server.
 
-      return @inner_outbound if @inner_outbound.is_a? MaZMQ::Pull
+      return @inner_outbound if @inner_outbound.is_a? PanZMQ::Pull
       $stdout.puts "Initializing Inner Outbound (PULL) socket"
-      @inner_outbound = MaZMQ::Pull.new
-      @inner_outbound.bind :ipc, "/tmp/cucub-inner-outbound.sock"
+      @inner_outbound = PanZMQ::Pull.new
+      @inner_outbound.bind "ipc:///tmp/cucub-inner-outbound.sock"
+      @inner_outbound.register
     end
 
 ####
@@ -154,7 +156,7 @@ module Cucub
       end
 =end
       
-      MaZMQ.terminate
+      PanZMQ.terminate
     end
   end
 end
