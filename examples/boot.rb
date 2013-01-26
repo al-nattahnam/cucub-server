@@ -1,6 +1,6 @@
 # Run it on root with this command: ruby bin/cucub-server start examples/boot.rb
 
-require './examples/reply_channel_test'
+require_relative './reply_channel_test'
 
 core = Core.new
 #core.oid = 1

@@ -1,5 +1,5 @@
 require 'singleton'
-require './lib/server/configuration'
+require_relative './server/configuration'
 
 module Cucub
   class Server

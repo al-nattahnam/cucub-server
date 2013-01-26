@@ -1,5 +1,5 @@
 require 'cucub-protocol'
 
-require './lib/channel'
-require './lib/dispatcher'
-require './lib/server'
+require_relative './channel'
+require_relative './dispatcher'
+require_relative './server'
