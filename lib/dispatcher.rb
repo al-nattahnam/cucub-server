@@ -33,7 +33,7 @@ module Cucub
       @ipc_get = Cucub::Channel.ipc_get
 =end
       if Cucub::Server::Configuration.instance.uses.include? ("box")
-        @box = Cucub::Channel.reply
+        @box = Cucub::Server::Channel.reply
       end
 
 ####
@@ -72,13 +72,13 @@ module Cucub
     end
 
     def init_inner_channels
-      @inner_inbound = Cucub::Channel.inner_inbound
-      @inner_outbound = Cucub::Channel.inner_outbound
+      @inner_inbound = Cucub::Server::Channel.inner_inbound
+      @inner_outbound = Cucub::Server::Channel.inner_outbound
     end
 
     def stop
       #### Cucub::LiveProxy.shutdown!
-      Cucub::Channel.shutdown!
+      Cucub::Server::Channel.shutdown!
       #EM.stop
     end
   end

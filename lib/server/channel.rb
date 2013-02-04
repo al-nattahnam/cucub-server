@@ -1,4 +1,5 @@
 module Cucub
+  class Server
   module Channel
 =begin
     def self.initialize
@@ -23,6 +24,9 @@ module Cucub
         # TODO Sync - returns object return
         # Usar EM Defer
         #Cucub::LiveObject.pass(msg)
+
+        message = Cucub::Message.parse(msg)
+        # TODO Route messages according class_name and object_uuid
 
         @inner_inbound.send_string(msg)
 
@@ -74,6 +78,9 @@ module Cucub
       @inner_outbound = PanZMQ::Pull.new
       @inner_outbound.bind "ipc:///tmp/cucub-inner-outbound.sock"
       @inner_outbound.register
+      @inner_outbound.on_receive {|msg|
+        puts "Received at Inner Outbound: #{msg}"
+      }
     end
 
 ####
@@ -158,5 +165,6 @@ module Cucub
       
       PanZMQ.terminate
     end
+  end
   end
 end
