@@ -5,8 +5,11 @@ module Cucub
   class Server
     include Singleton
 
+    attr_reader :stats_collector
+
     def initialize
       @dispatcher = Cucub::Dispatcher.instance
+      @stats_collector = Cucub::StatsCollector.new
     end
 
     def start!(server_opts={})
@@ -21,6 +24,19 @@ module Cucub
 
     def address
       @address
+    end
+
+    def register_vm(params)
+      puts "REGISTER_VM: #{params}"
+      uid, klass = params
+
+      vm = OpenStruct.new
+      vm.uid = uid
+      vm.klass = klass.underscore
+
+      # @vm_manager.register_vm(vm)
+      @stats_collector.register_vm(vm)
+      puts "registered: #{uid} #{klass}"
     end
 
     def config_filepath

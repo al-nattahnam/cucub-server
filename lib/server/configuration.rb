@@ -6,7 +6,7 @@ module Cucub
       include Singleton
 
       def initialize
-        @loader = Cucub::Protocol::Loader.instance
+        @loader = Cucub::Protocol::Loader.new
         set_config_file
         reload
       end

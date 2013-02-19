@@ -15,6 +15,8 @@ module Cucub
       @reply.bind("tcp://#{Cucub::Server.instance.address}:6441")
       @reply.register
 
+      # TODO Do this setting on Dispatcher ?
+      # TODO Decouple into a Different handler: OuterInboundRouting
       @reply.on_receive { |msg|
         # Chequear por llamada async / sync
 
@@ -79,7 +81,19 @@ module Cucub
       @inner_outbound.bind "ipc:///tmp/cucub-inner-outbound.sock"
       @inner_outbound.register
       @inner_outbound.on_receive {|msg|
-        puts "Received at Inner Outbound: #{msg}"
+        message = Cucub::Message.parse(msg)
+        puts "Received @inner_outbound@server: #{message.inspect}"
+        case message.header.to.layer
+          when :server
+            message.unlock(:inner_outbound)
+            case message.body.action
+              when "register"
+                Cucub::Server.instance.register_vm(message.body.additionals)
+            end
+        end
+
+
+        # Cucub::Server.instance.register_vm()
       }
     end
 
