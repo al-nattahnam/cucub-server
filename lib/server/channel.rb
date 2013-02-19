@@ -28,9 +28,14 @@ module Cucub
         #Cucub::LiveObject.pass(msg)
 
         message = Cucub::Message.parse(msg)
+        puts "received@server msg to: #{message.header.to.class_name}"
+        # TODO check why this class_name is in capitals and the configurations.classes are in downcase
+        destination = Cucub::Dispatcher.instance.router.random_with_least_assignments(message.header.to.class_name.downcase, Cucub::Server.instance.stats_collector.vm_stats)
+
         # TODO Route messages according class_name and object_uuid
 
-        @inner_inbound.send_string(msg)
+        @inner_inbound.send_string("#{destination.klass}##{destination.uid} #{msg}")
+        Cucub::Server.instance.stats_collector.sent_msg_to(destination.uid, destination.klass)
 
         @reply.send_string("Cucub::Reply ok!")
       }
@@ -62,9 +67,9 @@ module Cucub
       # It works by setting up an IPC socket. In a future, it might be considered to
       #   enable tcp communication, so workers can be outside the local server.
 
-      return @inner_inbound if @inner_inbound.is_a? PanZMQ::Push
+      return @inner_inbound if @inner_inbound.is_a? PanZMQ::Broadcast
       $stdout.puts "Initializing Inner Inbound (PUSH) socket"
-      @inner_inbound = PanZMQ::Push.new
+      @inner_inbound = PanZMQ::Broadcast.new
       @inner_inbound.bind "ipc:///tmp/cucub-inner-inbound.sock"
     end
 
@@ -89,6 +94,15 @@ module Cucub
             case message.body.action
               when "register"
                 Cucub::Server.instance.register_vm(message.body.additionals)
+              when "ready"
+                puts "READY: #{message.inspect}"
+                message.body.additionals.each do |done|
+                  ready = Cucub::Message.parse(done)
+                  ready.unlock(:msgpack)
+                  # puts "==== #{ready.inspect}"
+                  Cucub::Server.instance.stats_collector.mark_done(message.header.from.object_uuid, ready.header.to.class_name.underscore)
+                end
+                puts "STATS: #{Cucub::Server.instance.stats_collector.vm_stats}"
             end
         end
 

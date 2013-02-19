@@ -7,6 +7,12 @@ module Cucub
 
     def initialize
       #@load_balancer = nil
+      @router = Cucub::Router.new
+    end
+
+    def router
+      # TODO provisory
+      @router
     end
 
     def start(block=nil)
@@ -32,9 +38,8 @@ module Cucub
       end
       @ipc_get = Cucub::Channel.ipc_get
 =end
-      if Cucub::Server::Configuration.instance.uses.include? ("box")
-        @box = Cucub::Server::Channel.reply
-      end
+
+      @box = Cucub::Server::Channel.reply
 
 ####
 =begin
@@ -79,7 +84,6 @@ module Cucub
     def stop
       #### Cucub::LiveProxy.shutdown!
       Cucub::Server::Channel.shutdown!
-      #EM.stop
     end
   end
 end
