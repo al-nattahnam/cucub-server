@@ -41,7 +41,7 @@ module Cucub
           # TODO Route messages according class_name and object_uuid
 
           Cucub::Server::Channel.inner_inbound.send_string("#{destination.klass}##{destination.uid} #{msg}")
-          Cucub::Server.instance.stats_collector.sent_msg_to(destination.uid, destination.klass)
+          Cucub::Server.instance.stats_collector.sent_msg_to(destination.uid, destination.klass, message.uuid)
 
           @socket.send_string("Cucub::Reply ok!")
         }
@@ -84,12 +84,11 @@ module Cucub
                   Cucub::Server.instance.register_vm(message.body.additionals)
                 when "ready"
                   puts "READY: #{message.inspect}"
-                  message.body.additionals.each do |done|
-                    ready = Cucub::Message.parse(done)
-                    ready.unlock(:msgpack)
-                    # puts "==== #{ready.inspect}"
-                    Cucub::Server.instance.stats_collector.mark_done(message.header.from.object_uuid, ready.header.to.class_name.underscore)
+                  
+                  message.body.additionals.each do |done_uuid|
+                    Cucub::Server.instance.stats_collector.mark_done(message.header.from.object_uuid, Cucub::Server.instance.stats_collector.class_for_msg(done_uuid), done_uuid)
                   end
+
                   puts "STATS: #{Cucub::Server.instance.stats_collector.vm_stats}"
               end
           end
