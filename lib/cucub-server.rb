@@ -4,6 +4,7 @@ require 'ostruct'
 
 require_relative './server/channel'
 require_relative './server/outer_inbound_routing'
+require_relative './server/inner_outbound_routing'
 
 require_relative './stats_collector'
 require_relative './router'

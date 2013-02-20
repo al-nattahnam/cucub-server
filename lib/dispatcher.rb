@@ -80,6 +80,7 @@ module Cucub
     def init_inner_channels
       @inner_inbound = Cucub::Server::Channel.inner_inbound
       @inner_outbound = Cucub::Server::Channel.inner_outbound
+      Cucub::Server::InnerOutboundRouting.handle(@inner_outbound)
     end
 
     def stop
