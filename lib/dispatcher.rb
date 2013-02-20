@@ -40,6 +40,7 @@ module Cucub
 =end
 
       @box = Cucub::Server::Channel.box
+      Cucub::Server::OuterInboundRouting.handle(@box)
 
 ####
 =begin

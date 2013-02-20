@@ -40,7 +40,6 @@ module Cucub
       puts "#{vm.klass} #{uid}: #{vm.assigned} assigned; #{vm.done} done"
       
       @pending.select{|key, value| value.include?(msg_uuid)}.values[0].delete(msg_uuid)
-      puts "pending_for: #{@pending}"
     end
   
     def vm_stats
