@@ -39,7 +39,7 @@ module Cucub
       @ipc_get = Cucub::Channel.ipc_get
 =end
 
-      @box = Cucub::Server::Channel.reply
+      @box = Cucub::Server::Channel.box
 
 ####
 =begin
